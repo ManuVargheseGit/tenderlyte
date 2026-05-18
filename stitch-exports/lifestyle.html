@@ -1,0 +1,273 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>TenderLyte | The Zen Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eeeeee",
+                    "on-tertiary-container": "#8a8e8d",
+                    "primary-fixed-dim": "#aacfbe",
+                    "primary": "#00150e",
+                    "surface-tint": "#436558",
+                    "inverse-surface": "#2f3131",
+                    "outline": "#717974",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "surface-container-highest": "#e2e2e2",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "primary-container": "#082c21",
+                    "on-primary-fixed": "#002117",
+                    "background": "#f9f9f9",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#c5ebda",
+                    "on-surface-variant": "#414845",
+                    "tertiary-container": "#232726",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#aacfbe",
+                    "surface": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#2c4d41",
+                    "tertiary-fixed": "#e0e3e1",
+                    "secondary-container": "#bff529",
+                    "on-secondary-container": "#536d00",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#0e1211",
+                    "outline-variant": "#c1c8c3",
+                    "on-tertiary-fixed-variant": "#434846",
+                    "on-tertiary-fixed": "#181c1b",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed": "#bff529",
+                    "tertiary-fixed-dim": "#c4c7c5",
+                    "secondary-fixed-dim": "#a5d700",
+                    "on-background": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#729586",
+                    "on-secondary-fixed": "#151f00",
+                    "secondary": "#4e6700",
+                    "on-surface": "#1a1c1c",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-low": "#f3f3f4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "mobile-margin": "24px",
+                    "container-padding": "64px",
+                    "card-gap": "32px",
+                    "unit": "8px",
+                    "section-gap": "160px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Sora"],
+                    "label-caps": ["Sora"],
+                    "headline-lg-mobile": ["Sora"],
+                    "body-md": ["Manrope"],
+                    "headline-lg": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "body-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "display-lg": ["84px", {"lineHeight": "92px", "letterSpacing": "-0.04em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .text-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+<style data-stitch-cursor="">*{cursor:crosshair!important}[contenteditable="true"]:focus,.cursor-text:focus{cursor:text!important}</style><style data-stitch-cursor=""></style></head>
+<body class="bg-background text-on-surface font-body-lg selection:bg-secondary-fixed/30 selection:text-primary">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-10 py-4 bg-surface-lowest/40 backdrop-blur-xl rounded-full mt-6 mx-auto w-[90%] max-w-7xl border border-white/20 shadow-[0_20px_50px_rgba(8,44,33,0.1)] transition-all duration-700 ease-in-out">
+<div class="font-headline-lg text-headline-lg tracking-tighter text-primary">TenderLyte</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-caps text-label-caps text-on-surface/70 font-medium" href="#">Showcase</a>
+<a class="text-on-surface/70 font-medium hover:text-secondary transition-all duration-500 hover:scale-105 font-label-caps text-label-caps" href="#">Purity</a>
+<a class="text-on-surface/70 font-medium hover:text-secondary transition-all duration-500 hover:scale-105 font-label-caps text-label-caps" href="#">Story</a>
+<a class="hover:text-secondary transition-all duration-500 hover:scale-105 font-label-caps text-label-caps text-secondary font-bold border-b-2 border-secondary" href="#">Lifestyle</a>
+<a class="text-on-surface/70 font-medium hover:text-secondary transition-all duration-500 hover:scale-105 font-label-caps text-label-caps" href="#">Contact</a>
+</div>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-8 py-3 rounded-full font-label-caps text-label-caps hover:scale-105 transition-transform duration-300 shadow-sm">
+            Shop Now
+        </button>
+</nav>
+<!-- Hero: Editorial High-Key Zen -->
+<main class="min-h-screen relative flex items-center justify-center overflow-hidden pt-32">
+<!-- Floating atmospheric elements -->
+<div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-secondary-fixed/5 rounded-full blur-[120px]"></div>
+<div class="absolute -bottom-40 -left-40 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px]"></div>
+<div class="relative z-10 w-full max-w-7xl px-container-padding grid grid-cols-12 gap-card-gap items-center">
+<!-- Poetic Floating Text Left -->
+<div class="col-span-12 md:col-span-3 space-y-12">
+<div class="flex items-center gap-4 group">
+<span class="w-12 h-[1px] bg-primary/20 group-hover:w-20 transition-all duration-700"></span>
+<p class="font-label-caps text-label-caps text-on-surface/40 uppercase tracking-[0.3em]">Origin 001</p>
+</div>
+<div class="space-y-4">
+<h2 class="font-display-lg text-headline-lg text-primary/30 leading-tight">Unfiltered<br>Silence.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[200px]">The essence of hydration, stripped of noise. Purely from the source.</p>
+</div>
+</div>
+<!-- Central Masterpiece Image -->
+<div class="col-span-12 md:col-span-6 relative flex justify-center">
+<div class="relative group">
+<img alt="Water Droplet Centerpiece" class="w-[500px] h-[700px] object-cover rounded-[100px] shadow-2xl transition-transform duration-1000 group-hover:scale-[1.02]" data-alt="A single, hyper-realistic water droplet captured in extreme macro photography as it hangs suspended in mid-air against a pristine, high-key white background. The droplet is perfectly clear, reflecting a soft, ethereal light that creates brilliant white highlights and deep, liquid shadows. The surrounding space is vast and empty, emphasizing a sense of absolute purity, clinical cleanliness, and organic zen-like serenity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgSr9BDcOMTSw6Bsj4-de9zzHDlBxTG8dpFHgfZdJr4D-R_2znGb1O1QrUO_Eq9HDq8i9_Mfgm6lHYhkjs-cIoJcCpOhOUNE3GLKmlhG2MB1ZU1ftxUlTJmslxouePX3NwRgBWnnizXHhdkrc9ApxyTB4heC_rAU0N9doyWDbWp9WU8DBF7LehYUoPnejoZ2rpTxeNxtFE13TXQQB0VrCp0xR6inF0VY8x668ZYagqPOiKh2rLFEOs4tRacabTTO40KlAKIL44_HA">
+<!-- Floating Badge -->
+<div class="absolute -bottom-10 -right-10 glass-panel p-8 rounded-3xl shadow-xl max-w-[240px]">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="water_drop">water_drop</span>
+<p class="font-headline-lg text-[24px] text-primary mb-2">99.9% Vital</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Electrolytes harvested in total darkness to preserve organic integrity.</p>
+</div>
+</div>
+</div>
+<!-- Vertical Poetic Arrangement Right -->
+<div class="col-span-12 md:col-span-3 flex flex-col items-end gap-20">
+<div class="text-vertical font-label-caps text-label-caps tracking-[0.5em] text-on-surface/20 py-10 uppercase border-r border-primary/10 pr-6">
+                    Vitality is a Choice
+                </div>
+<div class="space-y-8 text-right">
+<div class="glass-panel py-6 px-8 rounded-full inline-block">
+<span class="font-label-caps text-label-caps text-secondary">NO ADDITIVES</span>
+</div>
+<div class="glass-panel py-6 px-8 rounded-full inline-block">
+<span class="font-label-caps text-label-caps text-secondary">SUSTAINABLY TAPPED</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Section: The Philosophy of Void -->
+<section class="py-section-gap bg-white flex justify-center overflow-hidden">
+<div class="max-w-4xl px-mobile-margin text-center space-y-16">
+<h3 class="font-display-lg text-display-lg text-primary opacity-10 tracking-tighter leading-none mb-[-40px] select-none">ESSENCE</h3>
+<div class="space-y-8 relative z-10">
+<p class="font-headline-lg text-headline-lg text-primary font-light italic leading-relaxed">
+                    "True purity isn't the presence of something good, but the absolute absence of everything else."
+                </p>
+<div class="w-1 h-24 bg-gradient-to-b from-primary to-transparent mx-auto opacity-20"></div>
+<p class="font-label-caps text-label-caps tracking-widest text-on-surface-variant">THE TENDERLYTE MANIFESTO</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid: The Details -->
+<section class="pb-section-gap px-container-padding">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Long Card: Tropical Precision -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-[40px] h-[600px] bg-surface-container-low">
+<img alt="Lush Jungle Mist" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-[3s]" data-alt="A cinematic, high-definition landscape of a tropical palm grove at sunrise, veiled in a thick, ethereal white mist. The lighting is soft and diffused, creating a high-key aesthetic where the vibrant greens of the palms are muted into pastel shades. Sunlight filters through the fog in sharp, delicate rays, creating a sense of pristine, untouched nature and clinical cleanliness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTOTT_IT5DY_dGyvNKB_jf34Dlq37PqelC1Vkh3wxn3Iq-LNgn41NK59oCXyNbEtRlufaqgsT1yiv1eVo89B9cOlHpp5BL7sj2VeBWvBvX_slICBWQwIOQS7j-Jc26Nhoe9mU7AfpXgoRZsLRu8T8htApsnqIcNC1hmHrPGxHjF4IV7_HxJAZESNLBTAac3fcSM8BMbIPWa1JXp6wiqpoMZc6AtJYBv4JK2XfNrtziudYO3UGusQyrRhihst5biokUEdqNcojK-a0">
+<div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
+<div class="absolute bottom-12 left-12 max-w-md space-y-6">
+<span class="font-label-caps text-label-caps bg-primary text-white px-4 py-2 rounded-full">THE HARVEST</span>
+<h4 class="font-headline-lg text-headline-lg text-primary">Micro-Filtered by Nature</h4>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Our coconuts are hand-selected at dawn, ensuring the water never touches the air until it hits your bottle.</p>
+</div>
+</div>
+<!-- Small Square: Ingredient -->
+<div class="md:col-span-4 glass-panel rounded-[40px] p-12 flex flex-col justify-between hover:bg-white transition-colors duration-500">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="bolt" data-weight="fill">bolt</span>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline-lg text-[32px] text-primary">Bio-Available Electrolytes</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Immediate absorption for cellular restoration. No synthetic minerals.</p>
+<a class="inline-flex items-center gap-2 font-label-caps text-label-caps text-secondary group" href="#">
+                        LEARN MORE 
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Small Square: Glass Tech -->
+<div class="md:col-span-4 glass-panel rounded-[40px] p-12 flex flex-col justify-between order-last md:order-none">
+<div class="space-y-4">
+<span class="font-label-caps text-label-caps text-on-surface/40">CONTAINMENT</span>
+<h4 class="font-headline-lg text-[32px] text-primary">Zero-React Glass</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Bottled in medical-grade borosilicate to preserve the delicate alkalinity.</p>
+</div>
+<div class="pt-8 border-t border-primary/5">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-primary">RECYCLABLE</span>
+<span class="font-label-caps text-label-caps text-primary">100%</span>
+</div>
+</div>
+</div>
+<!-- Wide Card: Product Reveal -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-[40px] h-[400px] bg-primary">
+<div class="absolute inset-0 flex items-center justify-center">
+<img alt="Coconut Concept" class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000" data-alt="A minimalist, high-end studio shot of a perfectly smooth green coconut resting on a reflective white surface. Small, pristine droplets of condensation cling to its surface, catching a soft, bright studio light. The background is a seamless, blindingly white void, creating an editorial look of high-key minimalism and refreshing purity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfEw7Fu7JKUQOSAnBCyupc0wSq__XXPCWvgNKJ-dzJNZe7kfcKCxnDawtkPWNL3psEobM25iwXSLF57bCgVhK7mqLKAekEjRYU1NirHdbQreSG-rTNhNOBnfETu-_rNwhoeg5n13rTrwQiiomOIyT0QObFfMmNeJ5T-27PHV5dMk4166qEdXqS75Q0IggarQVF2lKjeJRXO1OCQ5DdI6UEqE0shTp6blhLoqYxz72rQidrKtcwhCvgoeP3hgqZ2xt5z2jFHlw802E">
+</div>
+<div class="relative z-10 p-12 flex flex-col h-full justify-between items-start">
+<h4 class="font-display-lg text-headline-lg text-white">Experience the Purity.</h4>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-12 py-4 rounded-full font-label-caps text-label-caps hover:bg-white transition-colors duration-300">
+                        GET THE SUBSCRIPTION
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary full-width py-20 px-mobile-margin md:px-container-padding flex flex-col md:flex-row justify-between items-center gap-card-gap">
+<div class="font-display-lg-mobile text-on-primary opacity-20 select-none">TenderLyte</div>
+<div class="flex flex-col md:flex-row gap-12 text-center md:text-left">
+<div class="space-y-6">
+<p class="font-label-caps text-label-caps opacity-40">LEGAL</p>
+<div class="flex flex-col gap-4">
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-body-md text-body-md" href="#">Sustainability</a>
+</div>
+</div>
+<div class="space-y-6">
+<p class="font-label-caps text-label-caps opacity-40">PARTNERS</p>
+<div class="flex flex-col gap-4">
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-body-md text-body-md" href="#">Stockists</a>
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-body-md text-body-md" href="#">Press</a>
+</div>
+</div>
+</div>
+<div class="text-center md:text-right space-y-4">
+<p class="font-body-md text-body-md opacity-60">© 2024 TenderLyte. Purity in every drop.</p>
+<div class="flex gap-6 justify-center md:justify-end">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-fixed transition-colors" data-icon="public">public</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary-fixed transition-colors" data-icon="eco">eco</span>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

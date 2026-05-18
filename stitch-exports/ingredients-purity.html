@@ -1,0 +1,287 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>TenderLyte — Purity &amp; Science</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#a5d700",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "outline-variant": "#c1c8c3",
+                        "on-primary-fixed-variant": "#2c4d41",
+                        "surface-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "on-secondary-fixed": "#151f00",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "on-primary-container": "#729586",
+                        "primary-container": "#082c21",
+                        "outline": "#717974",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#002117",
+                        "tertiary-container": "#232726",
+                        "secondary": "#4e6700",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#aacfbe",
+                        "on-secondary-container": "#536d00",
+                        "surface-container": "#eeeeee",
+                        "surface-bright": "#f9f9f9",
+                        "on-surface-variant": "#414845",
+                        "surface-container-low": "#f3f3f4",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f9",
+                        "tertiary-fixed": "#e0e3e1",
+                        "secondary-fixed": "#bff529",
+                        "secondary-container": "#bff529",
+                        "tertiary": "#0e1211",
+                        "on-error": "#ffffff",
+                        "primary": "#00150e",
+                        "surface": "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#aacfbe",
+                        "inverse-surface": "#2f3131",
+                        "primary-fixed": "#c5ebda",
+                        "on-tertiary-fixed": "#181c1b",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-container": "#8a8e8d",
+                        "surface-tint": "#436558"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-gap": "32px",
+                        "section-gap": "160px",
+                        "mobile-margin": "24px",
+                        "container-padding": "64px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Sora"],
+                        "body-md": ["Manrope"],
+                        "headline-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "38px", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "display-lg": ["84px", {"lineHeight": "92px", "letterSpacing": "-0.04em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { @apply bg-background text-on-background overflow-x-hidden; }
+        .glass { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .inner-glow { box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3); }
+        .ambient-glow { filter: blur(120px); opacity: 0.15; pointer-events: none; position: absolute; }
+        .hero-gradient { background: radial-gradient(circle at center, rgba(191, 245, 41, 0.05) 0%, transparent 70%); }
+    </style>
+<style data-stitch-cursor=""></style><style data-stitch-scroll-lock=""></style></head>
+<body class="font-body-md text-body-md">
+<!-- Global Layout Decorators -->
+<div class="fixed inset-0 z-[-1] pointer-events-none">
+<div class="ambient-glow bg-secondary w-[600px] h-[600px] -top-40 -right-40 rounded-full"></div>
+<div class="ambient-glow bg-primary w-[800px] h-[800px] bottom-0 -left-60 rounded-full"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<!-- Navigation Shell -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-10 py-4 rounded-full mt-6 mx-auto w-[90%] max-w-7xl bg-surface-lowest/40 backdrop-blur-xl border border-white/20 shadow-[0_20px_50px_rgba(8,44,33,0.1)] transition-all duration-700 ease-in-out">
+<div class="font-headline-lg text-headline-lg tracking-tighter text-primary">TenderLyte</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface/70 font-medium hover:text-secondary hover:scale-105 transition-all duration-500" href="#">Showcase</a>
+<a class="text-secondary font-bold border-b-2 border-secondary hover:scale-105 transition-all duration-500" href="#">Purity</a>
+<a class="text-on-surface/70 font-medium hover:text-secondary hover:scale-105 transition-all duration-500" href="#">Story</a>
+<a class="text-on-surface/70 font-medium hover:text-secondary hover:scale-105 transition-all duration-500" href="#">Lifestyle</a>
+<a class="text-on-surface/70 font-medium hover:text-secondary hover:scale-105 transition-all duration-500" href="#">Contact</a>
+</div>
+<button class="bg-secondary-container text-on-secondary-fixed font-label-caps text-label-caps px-8 py-3 rounded-full hover:shadow-[0_0_20px_rgba(191,245,41,0.4)] transition-all">Shop Now</button>
+</nav>
+<main class="relative z-10 pt-40">
+<!-- Hero Section: The Transformation -->
+<section class="min-h-[819px] flex flex-col items-center justify-center px-mobile-margin md:px-container-padding text-center">
+<div class="max-w-4xl space-y-6">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-[0.2em] inline-block mb-4">Scientific Purity</span>
+<h1 class="font-display-lg text-display-lg md:text-display-lg leading-tight text-primary">Molecular Hydration <br> Redefined.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">TenderLyte transitions from organic growth to medical-grade precision. Every drop is a symphony of electrolytes, filtered through nature and verified by science.</p>
+</div>
+<!-- Three.js Styled Hero Visualization -->
+<div class="relative w-full max-w-5xl aspect-video mt-12 rounded-[40px] overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 backdrop-blur-sm z-10 border border-white/30 rounded-[40px]"></div>
+<img class="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 transition-transform duration-[3s] ease-out" data-alt="A futuristic medical-grade laboratory visualization where a translucent 3D coconut is morphing into a complex holographic network of water molecules and glowing minerals. The scene is bathed in a soft green ambient light with floating particle effects and a cinematic motion blur, creating a sense of advanced clinical technology mixed with organic vitality. High-key lighting emphasizes the refractive glass textures and holographic UI elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6lEEr0ZxDwRhLigKaQwtMvtiqzI_dhVWMjsajBpwOOKyQ73xpJ30rypxAgloIXVjelUBZ5kZOn7hI-wAG2earm6M11hxvMAQag-QkBKBlsdwgdDUKMUoIUUZn03LPZOalk71IzoooKPvdXZxjiPHnQmnle8DIhFQD7RqJODzNLXSz7HTR_XDrPxTJwkC9r-7CiWG6OKf69-Sjv9x2VqUiJDgeSE9cJ3WZCSYv4cE0RONMp9do5hsat6WyahbU8DFlgYEHQwpYg6c">
+<!-- Floating Holographic Chips -->
+<div class="absolute top-1/4 left-1/4 z-20 glass p-6 rounded-2xl flex flex-col items-center gap-2 border-white/40 shadow-xl">
+<span class="material-symbols-outlined text-secondary scale-150 mb-2" data-icon="science">science</span>
+<span class="font-label-caps text-label-caps text-primary">PH LEVEL</span>
+<span class="font-headline-lg text-headline-lg text-primary">7.2</span>
+</div>
+<div class="absolute bottom-1/4 right-1/4 z-20 glass p-6 rounded-2xl flex flex-col items-center gap-2 border-white/40 shadow-xl">
+<span class="material-symbols-outlined text-secondary scale-150 mb-2" data-icon="shield_heart">shield_with_heart</span>
+<span class="font-label-caps text-label-caps text-primary">PURITY INDEX</span>
+<span class="font-headline-lg text-headline-lg text-primary">99.9%</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Purity Standards -->
+<section class="py-section-gap px-mobile-margin md:px-container-padding max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-card-gap">
+<!-- Large Feature Card -->
+<div class="md:col-span-7 glass rounded-[40px] p-12 flex flex-col justify-between min-h-[500px] border-white/40 hover:bg-white/50 transition-all">
+<div>
+<div class="flex gap-4 mb-8">
+<span class="glass px-4 py-1 rounded-full font-label-caps text-label-caps text-primary">NON-GMO</span>
+<span class="glass px-4 py-1 rounded-full font-label-caps text-label-caps text-primary">RAW</span>
+<span class="glass px-4 py-1 rounded-full font-label-caps text-label-caps text-primary">EU CLEAN-LABEL</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">EU Clean-Label Standards</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">We adhere to the world's most stringent purity protocols. Our process eliminates synthetic additives, ensuring that every sip contains only what the Earth intended.</p>
+</div>
+<div class="pt-10 flex items-center gap-6">
+<div class="h-16 w-16 rounded-full border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-primary">ISO 9001 CERTIFIED</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Batch 0422 Verified</p>
+</div>
+</div>
+</div>
+<!-- Side Info Card -->
+<div class="md:col-span-5 flex flex-col gap-card-gap">
+<div class="bg-primary rounded-[40px] p-10 text-on-primary flex flex-col gap-6 h-full">
+<span class="material-symbols-outlined text-secondary-fixed text-4xl" data-icon="biotech">biotech</span>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Purity Testing</h3>
+<p class="font-body-md text-body-md opacity-80">Three-stage filtration combined with spectroscopic analysis ensures zero contaminants and perfect mineral retention.</p>
+<button class="mt-auto flex items-center gap-2 font-label-caps text-label-caps text-secondary-fixed hover:gap-4 transition-all">
+                            DOWNLOAD LAB REPORT <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- The Mineral Matrix (High-Tech Grid) -->
+<section class="py-section-gap bg-primary-container relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+<div class="container mx-auto px-mobile-margin md:px-container-padding relative z-10">
+<div class="text-center mb-24">
+<h2 class="font-headline-lg text-headline-lg text-on-primary mb-4">The Mineral Matrix</h2>
+<p class="font-body-lg text-body-lg text-on-primary-container max-w-2xl mx-auto">Bio-available electrolytes engineered by nature to sync with your cellular rhythm.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<!-- Potassium -->
+<div class="flex flex-col items-center p-8 border border-white/10 rounded-3xl hover:bg-white/5 transition-all">
+<div class="w-16 h-16 rounded-full glass flex items-center justify-center mb-6 inner-glow">
+<span class="text-secondary font-bold text-xl">K</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-primary mb-2">Potassium</h4>
+<div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[85%]"></div>
+</div>
+<span class="mt-4 font-body-md text-on-primary-container">470mg / serving</span>
+</div>
+<!-- Magnesium -->
+<div class="flex flex-col items-center p-8 border border-white/10 rounded-3xl hover:bg-white/5 transition-all">
+<div class="w-16 h-16 rounded-full glass flex items-center justify-center mb-6 inner-glow">
+<span class="text-secondary font-bold text-xl">Mg</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-primary mb-2">Magnesium</h4>
+<div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[60%]"></div>
+</div>
+<span class="mt-4 font-body-md text-on-primary-container">25mg / serving</span>
+</div>
+<!-- Sodium -->
+<div class="flex flex-col items-center p-8 border border-white/10 rounded-3xl hover:bg-white/5 transition-all">
+<div class="w-16 h-16 rounded-full glass flex items-center justify-center mb-6 inner-glow">
+<span class="text-secondary font-bold text-xl">Na</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-primary mb-2">Sodium</h4>
+<div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[35%]"></div>
+</div>
+<span class="mt-4 font-body-md text-on-primary-container">40mg / serving</span>
+</div>
+<!-- Calcium -->
+<div class="flex flex-col items-center p-8 border border-white/10 rounded-3xl hover:bg-white/5 transition-all">
+<div class="w-16 h-16 rounded-full glass flex items-center justify-center mb-6 inner-glow">
+<span class="text-secondary font-bold text-xl">Ca</span>
+</div>
+<h4 class="font-label-caps text-label-caps text-on-primary mb-2">Calcium</h4>
+<div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full w-[45%]"></div>
+</div>
+<span class="mt-4 font-body-md text-on-primary-container">15mg / serving</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Clinical Detail Section -->
+<section class="py-section-gap px-mobile-margin md:px-container-padding">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-20">
+<div class="w-full md:w-1/2 relative">
+<div class="absolute -inset-4 bg-secondary/20 blur-3xl rounded-full"></div>
+<img class="relative z-10 rounded-[60px] w-full shadow-2xl" data-alt="A macro-photography shot of translucent water droplets resting on a polished clinical surface, reflecting a high-tech laboratory environment. The lighting is crisp and cool with subtle green light-leak effects, conveying medical-grade purity and precision. Holographic UI overlays show chemical structures and mineral data points in a sleek, minimalist font, emphasizing the advanced scientific nature of the hydration process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDByyaKXl_W2e75ZQS0fk9trkktSZ4HqubQrxnVbcJT29kYEXg_Hln0Vv7bzy5bARB6NEH_fEy6y4deweObdrpErUz4EIub7lIXYDCovzkKlAfYw6_zykDuShmD3W2fn1kEof8cV4cbV62xLU2eeunWKFaREtc9qch9AQLplDrKPqBH1IHk5DnKYbAY1kFqLYGxMKCgYBVOH2Mz4OREl5S98TEiLRMb-tm3_fEeO5jkRnVf_0CXdBhl5BIWE4LAjz0hZKqRiBXDKOw">
+</div>
+<div class="w-full md:w-1/2 space-y-8">
+<h3 class="font-display-lg-mobile md:font-headline-lg text-primary">Hydration Kinetics</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Our research focuses on the osmotic balance of naturally occurring electrolytes. By maintaining the raw molecular structure of the coconut water, we achieve a bioavailability rate that exceeds synthetic isotonic drinks by up to 40%.</p>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+<div>
+<h5 class="font-label-caps text-label-caps text-primary">RAPID ABSORPTION</h5>
+<p class="text-on-surface-variant">Hypotonic formula for instant cellular uptake.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+<div>
+<h5 class="font-label-caps text-label-caps text-primary">ZERO OXIDATION</h5>
+<p class="text-on-surface-variant">Cold-press sealed to prevent nutrient degradation.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-primary py-20 px-mobile-margin md:px-container-padding flex flex-col md:flex-row justify-between items-center gap-card-gap border-t border-white/10">
+<div class="font-display-lg-mobile text-on-primary opacity-20">TenderLyte</div>
+<div class="flex flex-col items-center md:items-end gap-6">
+<div class="flex gap-8">
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-label-caps text-label-caps" href="#">Privacy Policy</a>
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-label-caps text-label-caps" href="#">Sustainability</a>
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-label-caps text-label-caps" href="#">Stockists</a>
+<a class="text-on-primary/60 hover:text-on-primary transition-colors font-label-caps text-label-caps" href="#">Press</a>
+</div>
+<p class="font-body-md text-body-md text-on-primary/60">© 2024 TenderLyte. Purity in every drop.</p>
+</div>
+</footer>
+
+
+</body></html>
