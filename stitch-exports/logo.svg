@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
-  <text x="50%" y="65%" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="48" fill="#1B4332">
-    Tender<tspan fill="#40916C">Lyte</tspan>
-  </text>
-  <circle cx="340" cy="45" r="8" fill="#B7E4C7" opacity="0.6" />
-  <circle cx="355" cy="35" r="5" fill="#D8F3DC" opacity="0.4" />
-</svg>
