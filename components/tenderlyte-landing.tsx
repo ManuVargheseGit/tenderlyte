@@ -56,10 +56,10 @@ const navItems = [
 ];
 
 const showcaseFeatures = [
-  ["bolt", "Natural Electrolytes", "Bio-available minerals for instant cellular recovery and peak cognitive performance.", "bg-lime-400 text-[#536d00]"],
-  ["water_drop", "No Added Sugar", "Pure, unadulterated hydration with a naturally sweet profile from heritage palms.", "bg-[#c5ebda] text-[#002117]"],
-  ["energy_savings_leaf", "Fresh Daily", "Harvested every 24 hours to ensure the enzymatic vitality of our signature water.", "bg-[#e0e3e1] text-[#181c1b]"],
-  ["package_2", "Eco-Purity", "100% recyclable Tetra Pak packaging designed to block UV rays and preserve taste.", "bg-forest-900 text-white"]
+  ["bolt", "Natural Electrolytes", "Bio-available minerals for instant cellular recovery and peak cognitive performance.", "bg-[#c9ff35] text-[#536d00]"],
+  ["water_drop", "No Added Sugar", "Pure, unadulterated hydration with a naturally sweet profile from heritage palms.", "bg-[#d9ef77] text-[#425800]"],
+  ["energy_savings_leaf", "Fresh Daily", "Harvested every 24 hours to ensure the enzymatic vitality of our signature water.", "bg-[#bfe566] text-[#2f4600]"],
+  ["package_2", "Eco-Purity", "100% recyclable Tetra Pak packaging designed to block UV rays and preserve taste.", "bg-[#e9ff92] text-[#536d00]"]
 ];
 
 const minerals = [
@@ -304,50 +304,110 @@ function RemoteImage({ src, alt, className, priority = false }: { src: string; a
 }
 
 function ShowcaseHero() {
+  const prefersReducedMotion = useReducedMotion();
+  const cardLoop = prefersReducedMotion
+    ? undefined
+    : {
+        y: [0, -5, 0],
+        boxShadow: [
+          "0 20px 50px rgba(8, 44, 33, 0.05)",
+          "0 26px 64px rgba(8, 44, 33, 0.12)",
+          "0 20px 50px rgba(8, 44, 33, 0.05)"
+        ]
+      };
+
   return (
-    <section id="showcase" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-32 md:px-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#f9f9f9_0%,#e8e8e8_100%)]" />
-      <div className="pointer-events-none absolute -left-20 top-20 h-96 w-96 rounded-full bg-forest-950/5 blur-[120px]" />
-      <div className="pointer-events-none absolute -right-20 bottom-20 h-[500px] w-[500px] rounded-full bg-[#4e6700]/5 blur-[150px]" />
-
-      <motion.div
-        className="relative z-10 mb-16 max-w-4xl text-center"
-        initial={{ y: 42, opacity: 0, filter: "blur(12px)" }}
-        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+    <section id="showcase" className="hero-motion relative isolate h-[100svh] overflow-hidden px-6 md:px-10">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,255,255,0.18)_0%,rgba(0,0,0,0.08)_36%,rgba(0,0,0,0.18)_100%)]" />
+      <video
+        className="absolute inset-0 h-full w-full scale-110 object-cover blur-[18px] saturate-90 brightness-110"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        poster={images.heroCoconut}
       >
-        <p className="mb-4 block font-display text-xs font-bold uppercase tracking-[0.2em] text-[#4e6700]">Precision Hydration</p>
-        <h1 className="mb-6 font-display text-[48px] font-semibold leading-[52px] tracking-[-0.02em] text-forest-950 md:text-[84px] md:leading-[92px] md:tracking-[-0.04em]">
-          Nature&apos;s Design, <br />
-          <span className="text-[#4e6700]">Perfected.</span>
-        </h1>
-        <p className="mx-auto max-w-2xl text-lg leading-7 text-muted">
-          Experience the futuristic purity of TenderLyte. Harvested at the peak of vitality and preserved through advanced tetra-lock technology.
-        </p>
-      </motion.div>
+        <source src="/mp_.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-[#04120d]/30" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/55 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/35 to-transparent" />
 
-      <motion.div
-        className="relative z-10 flex w-full max-w-6xl flex-col items-center justify-between gap-10 md:flex-row md:gap-16"
-        initial={{ y: 54, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="flex w-full flex-col gap-6 md:w-1/4">
-          {showcaseFeatures.slice(0, 2).map(([icon, title, text, accent]) => (
-            <ShowcaseFeature key={title} icon={icon} title={title} text={text} accent={accent} />
-          ))}
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center py-4 md:py-6">
+        <div className="grid w-full items-center gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
+          <motion.div
+            className="hero-scroll-copy flex max-w-none flex-col justify-center self-center"
+            initial={{ y: 30, opacity: 0, filter: "blur(12px)" }}
+            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="mb-5 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.22em] text-[#e9ff92] md:text-[12px]">
+              <span className="h-px w-9 bg-[#e9ff92]/85" />
+              <span>Precision Hydration</span>
+            </div>
+            <h1 className="max-w-[9ch] font-display text-[clamp(36px,4.8vw,78px)] font-semibold leading-[0.92] tracking-[-0.04em] text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
+              Nature&apos;s Design,
+              <br />
+              <span className="text-[#c9ff35]">Perfected.</span>
+            </h1>
+            <p className="mt-4 max-w-xl text-[14px] leading-6 text-white/88 drop-shadow-[0_4px_18px_rgba(0,0,0,0.28)] md:text-[15px] md:leading-7">
+              Experience the futuristic purity of TenderLyte. Harvested at the peak of vitality and preserved through advanced tetra-lock technology.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-4">
+              <a className="button-primary" href="#contact" onPointerDown={ripple}>
+                Order A Sample Pack
+              </a>
+              <a className="button-ghost" href="#purity">
+                Explore Purity
+              </a>
+            </div>
+
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-4 self-center lg:justify-self-end"
+            initial={{ y: 40, opacity: 0, scale: 0.965 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 0.95, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="grid w-full max-w-[620px] gap-3 sm:grid-cols-2 lg:gap-4">
+              {showcaseFeatures.map(([icon, title, text, accent], index) => (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, y: 14, scale: 0.965 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 250,
+                    damping: 18,
+                    mass: 0.85,
+                    delay: 0.08 + index * 0.04
+                  }}
+                >
+                  <motion.div
+                    animate={cardLoop}
+                    transition={
+                      prefersReducedMotion
+                        ? undefined
+                        : {
+                            duration: 5.2,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                            delay: index * 0.18
+                          }
+                    }
+                  >
+                    <ShowcaseFeature icon={icon} title={title} text={text} accent={accent} />
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-        <div className="relative flex w-full flex-col items-center md:w-2/4">
-          <div className="relative aspect-square w-full max-w-[500px]">
-            <Image src={images.heroCoconut} alt="Ultra-realistic 3D tender coconut splash" fill priority sizes="(max-width: 768px) 92vw, 500px" className="object-contain mix-blend-multiply drop-shadow-[0_30px_70px_rgba(8,44,33,0.16)]" />
-          </div>
-        </div>
-        <div className="flex w-full flex-col gap-6 md:w-1/4">
-          {showcaseFeatures.slice(2).map(([icon, title, text, accent]) => (
-            <ShowcaseFeature key={title} icon={icon} title={title} text={text} accent={accent} />
-          ))}
-        </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
@@ -412,12 +472,12 @@ function ProductShowcase() {
 
 function ShowcaseFeature({ icon, title, text, accent }: { icon: string; title: string; text: string; accent: string }) {
   return (
-    <article className="glass-card rounded-3xl p-8 transition-all duration-700 hover:-translate-y-2" data-reveal>
-      <div className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl ${accent}`}>
+    <article className="glass-card flex min-h-[146px] flex-col rounded-[24px] border border-white/20 bg-[linear-gradient(180deg,rgba(201,255,53,0.18)_0%,rgba(255,255,255,0.08)_100%)] p-4 transition-all duration-700 hover:-translate-y-2 md:min-h-[154px] md:p-5">
+      <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${accent} md:mb-4 md:h-11 md:w-11`}>
         <span className="material-symbols-outlined">{icon}</span>
       </div>
-      <h3 className="mb-2 font-display text-[20px] font-medium leading-tight text-forest-950">{title}</h3>
-      <p className="text-sm leading-[1.55] text-muted">{text}</p>
+      <h3 className="mb-2 font-display text-[17px] font-medium leading-tight text-white md:text-[18px]">{title}</h3>
+      <p className="max-w-[21ch] text-[11px] leading-[1.4] text-white/78 md:text-[12px] md:leading-[1.45]">{text}</p>
     </article>
   );
 }
