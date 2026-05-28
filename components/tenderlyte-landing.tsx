@@ -72,7 +72,7 @@ const minerals = [
 const storyCards = [
   ["Direct Farmer Equity", "Our pricing model guarantees 40% above market value, allowing our farming communities to thrive and invest in their local education systems."],
   ["100% Traceable", "Scan your pack to see exactly which farm your water came from."],
-  ["Education Fund", "5% of every sale goes directly to the TenderLyte Scholars initiative in the Philippines."],
+  ["Education Fund", "5% of every sale goes directly to the TenderLyte Scholars initiative in India."],
   ["Biodiversity Protection", "We protect 2 acres of rainforest for every 1 acre of coconut plantation we manage."]
 ];
 
@@ -671,8 +671,8 @@ function ContactScreen() {
           <h2 className="section-title">Get in Touch</h2>
           <p className="text-lg leading-[1.6] text-muted">Have questions about our sourcing or wholesale opportunities? Our concierge team is ready to assist you in bringing purity to your lifestyle.</p>
           <div className="mt-8 space-y-5">
-            <InfoBlock title="Flagship Store" text="124 Mayfair Gardens, London, W1J" />
-            <InfoBlock title="General Inquiries" text="hello@cinematicpurity.com" />
+            <InfoBlock title="Flagship Store" text="Hayes and Harlington, The Charter Building, Charter Pl, Uxbridge UB8 1JG" />
+            <InfoBlock title="General Inquiries" text="admin.tenderlyte@gmail.com" />
           </div>
         </div>
         <form className="glass-panel grid gap-5 p-8" onSubmit={submitForm} data-reveal>
