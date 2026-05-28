@@ -6,82 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Dispatch, FormEvent, PointerEvent, RefObject, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
-
-const images = {
-  heroCoconut: "/assets/tenderlyte-hero-coconut.png",
-  coconutSplit:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAxqo2cPHwiLImWNGLSOPNHBjctsxgegQiRW0yelZp-HBN3Oo9Lf6CXgR9T4TavtVWWc0C1yqc1tn0M4x-ChAyBfOhnC67DtSCiWqT-h5pWhsh502jZKu6e77vTqUSG73viMb8vbkMtgr0SQpJv0NwjwrNajiAOeJ6A2U-4ZPGb62T3pwqyz735oYs9uUhY0aEnf22bKv86i4fruWShyMjXIdtPQ-TNnEb6PTa5VHTSKIhXteuzEES6u6jpdDL9aT_ojdHJOGkMLr0",
-  lab:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDoknTXjm6W3lKmHb_mDdTJvhBhDALVPB3ME_yFRXWzcQKi5ABOGN_X2JjmScMqpRs--Jn3NM_l7KDtvf-v7otnZmZeTenrftnoYZQjK164PffWrVNZsPyLueH2Y2gUHFdT0y3P9hN8D3w8k0RlxuN3CeABw8lOhSbi9u4QQqIqYStgLcbTErBUDLtJLA801O34ya5fiTnEGK9IQRsQawH27BbmcZ6Luc-kaFbUx_c1fyiGgdLEFskNYGZnt-9wPGKaxorsxOyJISo",
-  athlete:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDjn9nKkOtaFrLwG_MR3nPMnamotgJf8sRBqexupO-OaTtg18Odf4rHziIY2XD-dqGtWsTo7fkG3RdQuh42MKC1Wy7yLhkHAEY6eTuAdmyflfmLJPsb4RNjaWyTmQMI5YXiw4tJWSGYDGNSE9GSUnFEvWJfbiNFWpUb_02a5jxTh-5aV9vQsaGbp2csx7VFQ3dKZGXc8lOvm4vc1fmoxJWV9h2GSEPwAYJHnykPvZ98byHd8hBWbBzWtvXBL9DMZrGAa_xcecf27PQ",
-  work:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDyA-JGmZtdlzbk18prej0HGxc2Js1h6B5Di8y7Dn0_OpzS9HgzXPu6mrIm9l396frKHqLYmoMlBHlNejX8-eLM1Ts6r8U2bt5TtK6QrQftA2L7Jyp_yPckguADfZt35PcmU2FY4GNoCFF_I1fsm0GtcxTiRvQcmq6HaZralt_UuAtFrZLcZupvRAG0BugxPS8h2ZmNdd6e5YUfFOfTVSCUMSTIDvmlrA7Fu3Cs0-5nLpDkjZVBS-lzl_ed9LxQyf3k_GTZbT4SNIM",
-  molecule:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuA6lEEr0ZxDwRhLigKaQwtMvtiqzI_dhVWMjsajBpwOOKyQ73xpJ30rypxAgloIXVjelUBZ5kZOn7hI-wAG2earm6M11hxvMAQag-QkBKBlsdwgdDUKMUoIUUZn03LPZOalk71IzoooKPvdXZxjiPHnQmnle8DIhFQD7RqJODzNLXSz7HTR_XDrPxTJwkC9r-7CiWG6OKf69-Sjv9x2VqUiJDgeSE9cJ3WZCSYv4cE0RONMp9do5hsat6WyahbU8DFlgYEHQwpYg6c",
-  droplets:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDByyaKXl_W2e75ZQS0fk9trkktSZ4HqubQrxnVbcJT29kYEXg_Hln0Vv7bzy5bARB6NEH_fEy6y4deweObdrpErUz4EIub7lIXYDCovzkKlAfYw6_zykDuShmD3W2fn1kEof8cV4cbV62xLU2eeunWKFaREtc9qch9AQLplDrKPqBH1IHk5DnKYbAY1kFqLYGxMKCgYBVOH2Mz4OREl5S98TEiLRMb-tm3_fEeO5jkRnVf_0CXdBhl5BIWE4LAjz0hZKqRiBXDKOw",
-  plantation:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBoxOzeDE5cZkjqdSRwV7J9HC0XgrEuQc9X9mZ22ceyxxqJM-_LKjLuaTmYuNYTqKHvAzscAFcmmqC06Qr3LQZyKCpUfFsSHd95jpn3mFA1OYvoas0dIGnGEB_kbg53sn1mjKwoQWI03SXbi6CJ_us8uhhP_4H_eb7e2e7cw5XxkTO5Zh-qAFiQIjn21qG_X_vM8L-S9U62pJ5i0AZAx8PWwBadbIiZE4U14bkDpvUaj5OyJa1s09WemJHUBwEaodQB8b0pjvB3OmY",
-  coconutTree:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBWvmgq63Lw7VZ46dk2shBJM9TUfZNgjNrHjNEOW3Q8709MXEQIYN6zyd7ehQqIGR2HlTqdATbjRlPKdMPTnOFjAa7L_sNAJKXZdr-Q5sGt6GXwr_pGRxlufZOtkGO-Rn63NzUo4IXyXq0FI3e1Nqf2iuKi6NkBXvAyzklEN_Mrt6IOF3vye0OprQJlkm89ossnY5SPmJq1UZZv6DGh0r7tDbCSlEaZolF7QGbtH471LXjO9-0WvucEhfSUrgQ3GFE1MzbhOUQzF2Q",
-  farmer:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuD6oTMYCeLOAbNeJ-_FbQU1qCjsrnsiKRXFfIGzwWYg7hyLE45UFNBAoU2jRuC_ZFQorhpi62NNlfNCV6jXuxkpFC-W3G0LCfM22P6qo-s0R7bEcFerQlREkokB6vCL7vQ3679gOM_pfWd4t-6zv6jcfWy2V1q6jvQYQLF45sEIvD8CN8spQTjSdDhjwKorspk5QoWqli-csVaMDL57YbQiIuqFZ_Ley8TqCgZi15d04U1ahbq-fGSih-fmcTG1AaQ-eMOG_Yqu8lk",
-  filling:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCNTU8tC10MsBC7xRFgCak0UR7w0mhuApjK99U0CHpNBVnGCRBhB6kjfKzayGoxsq3oJrr2zjj16UOhKnR8ZLYLuXHKHQBIkOEK2XC1UiIzoPHu4dvx6lLqmZwaCKpCurb6Lq-Cm8nJ5Bngao5J3RLGNjjcU758M7-ffEYHTklJgbj-uKVzTN1ecsizfKQX7b6yNPFKbCkZhvNDsN24VrgnYp-FHSVINUfrRsm-Aep6WJO1m_W6TUhlx-p4qLtiMtTfWwz1gDOw4jw",
-  sunset:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDMORwyHeoQsW2wnVJ1hITUKZk3cfKlswnOPptM_Th1UVLuG7cPXwZv_esdMJ5l1FfkXOV8qcU3p2yt47F4t2h6ZOfoot6lVpUiQVUEdJQlUNJL_FE_4kTmYZa8e3ZsSkVwm9DZDeu9ozAke4xEm-zpAZVcCidC3Ga5hGCtbmDMwUsHOEhiTRXcZuWw2o7PAfU7FqSG9_Q-if7bLXA1TdhAmIo6LS3Za4EXSWTh8a7WEoE8QplEv54hnqumFLViJoUzru74n1avikE",
-  dropletHero:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDgSr9BDcOMTSw6Bsj4-de9zzHDlBxTG8dpFHgfZdJr4D-R_2znGb1O1QrUO_Eq9HDq8i9_Mfgm6lHYhkjs-cIoJcCpOhOUNE3GLKmlhG2MB1ZU1ftxUlTJmslxouePX3NwRgBWnnizXHhdkrc9ApxyTB4heC_rAU0N9doyWDbWp9WU8DBF7LehYUoPnejoZ2rpTxeNxtFE13TXQQB0VrCp0xR6inF0VY8x668ZYagqPOiKh2rLFEOs4tRacabTTO40KlAKIL44_HA",
-  jungleMist:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBTOTT_IT5DY_dGyvNKB_jf34Dlq37PqelC1Vkh3wxn3Iq-LNgn41NK59oCXyNbEtRlufaqgsT1yiv1eVo89B9cOlHpp5BL7sj2VeBWvBvX_slICBWQwIOQS7j-Jc26Nhoe9mU7AfpXgoRZsLRu8T8htApsnqIcNC1hmHrPGxHjF4IV7_HxJAZESNLBTAac3fcSM8BMbIPWa1JXp6wiqpoMZc6AtJYBv4JK2XfNrtziudYO3UGusQyrRhihst5biokUEdqNcojK-a0",
-  coconutConcept:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBfEw7Fu7JKUQOSAnBCyupc0wSq__XXPCWvgNKJ-dzJNZe7kfcKCxnDawtkPWNL3psEobM25iwXSLF57bCgVhK7mqLKAekEjRYU1NirHdbQreSG-rTNhNOBnfETu-_rNwhoeg5n13rTrwQiiomOIyT0QObFfMmNeJ5T-27PHV5dMk4166qEdXqS75Q0IggarQVF2lKjeJRXO1OCQ5DdI6UEqE0shTp6blhLoqYxz72rQidrKtcwhCvgoeP3hgqZ2xt5z2jFHlw802E",
-  cracked:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAx4-PHLy5pwjVXDzWq-jP6d6TeFD1s-p_wOAlIqO_cLnzkVz_Elp-ymZwqzbD3voZmLiCb3-xzJpmzHncQvoclQ8NDKJYNTbjq4ZL4soz-0ljeuvN9WwdXoA1BGk659pdrpk0onDppMKO7xO2HkZMLXOahpYr8fNIQru6N-0jNzMORU7RJ6qzFA4tiohfqRF-AR8ARGURgDUq475ICTeiyEJqzgVh3kg5DNn_ObwvnXvVX6CnGCvcviCtLdJt-vLH3y9jZFhnjG-g",
-  handPicked:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAiQoJhEI3d8YhU1x5nVZA4-l-swAw53pX_tSnSTff8Jrcgn6UvapcKnpJA1a5kdu18anm8gTs6JCJDXPZ9jZVzxJhGNJADjW-sz6rr6iu1XG7egupZj_CpNnfLpgkVjSW7hSIfGVKvTQ72TRc64iuUxsZvCtgmA2Y2apLkT7DwHkkKpMBwL9z9ucKmjdpr2Pspo6jViZURSrMwUY4CfHdl1hlAARcZ5IcB95jffRfISrS9vQJ01VDi2zupw7ayQHWcSvGgi4nBXjA",
-  process:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAZvnNSuJbfUZ0-iIKuyvS8ZYwGguat9dTHYNb_0IOg2qJPZbLFgVdGsHmUVmSbIedGm_SGg3V4Rx2H37kuzIGESwDPBt1vvw_4NVVIG5ri2lOwVMnn4nCPyi1Xf79-pgURpEiPstQFb-gzo_N4OJEs0aNQlFtJUVz4gm8rylLmTWyI4Il-zm65TtGobZ0W9_wNq0p-2OtLHwk4TWcAn1_sYmuKFUqOqootJWS5bg4mmOl8ITzqADWgq7VGezY4OG6NweFNnrbpuUo",
-  bottle:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCqB1a6CcgEy0UyD5bxF9l9YT3S4_YnPF2B8yRmDabfcVi_zC4M-Va7x9O7E0-8tDqof6Nn-_WnctI4ARl1LWch1eO7bU32nRvGKYOAG-u-cQLIuU0aeSZLt_YFvIGmlqO5QtFIBxwgDa6HXcGMolWnKL7fCjlPjHi7tU77hE4X310UxahrfBOmKmSbnwet0PATIGGrZfxCle3EJFfDXzvWjeFG0LreTDXq1VS8ocNAVnv6nJTAlmQdl3Olv7mTcsddrqOBBiOEYMA"
-};
-
-const navItems = [
-  { href: "#showcase", label: "Showcase" },
-  { href: "#purity", label: "Purity" },
-  { href: "#story", label: "Story" },
-  { href: "#lifestyle", label: "Lifestyle" },
-  { href: "#contact", label: "Contact" }
-];
-
-const showcaseFeatures = [
-  ["bolt", "Natural Electrolytes", "Bio-available minerals for instant cellular recovery and peak cognitive performance.", "bg-[#c9ff35] text-[#536d00]"],
-  ["water_drop", "No Added Sugar", "Pure, unadulterated hydration with a naturally sweet profile from heritage palms.", "bg-[#d9ef77] text-[#425800]"],
-  ["energy_savings_leaf", "Fresh Daily", "Harvested every 24 hours to ensure the enzymatic vitality of our signature water.", "bg-[#bfe566] text-[#2f4600]"],
-  ["package_2", "Eco-Purity", "100% recyclable Tetra Pak packaging designed to block UV rays and preserve taste.", "bg-[#e9ff92] text-[#536d00]"]
-];
-
-const minerals = [
-  ["Potassium", "690mg"],
-  ["Magnesium", "60mg"],
-  ["Sodium", "45mg"],
-  ["Calcium", "58mg"]
-];
-
-const storyCards = [
-  ["Direct Farmer Equity", "Our pricing model guarantees 40% above market value, allowing our farming communities to thrive and invest in their local education systems."],
-  ["100% Traceable", "Scan your pack to see exactly which farm your water came from."],
-  ["Education Fund", "5% of every sale goes directly to the TenderLyte Scholars initiative in India."],
-  ["Biodiversity Protection", "We protect 2 acres of rainforest for every 1 acre of coconut plantation we manage."]
-];
-
-const cartItems = [
-  { id: "natural-electrolytes", name: "Natural Electrolytes", description: "Bio-available minerals for instant cellular recovery.", accent: "bg-[#c9ff35] text-[#536d00]" },
-  { id: "no-added-sugar", name: "No Added Sugar", description: "Pure hydration with a naturally sweet profile.", accent: "bg-[#d9ef77] text-[#425800]" },
-  { id: "fresh-daily", name: "Fresh Daily", description: "Harvested every 24 hours for peak vitality.", accent: "bg-[#bfe566] text-[#2f4600]" },
-  { id: "eco-purity", name: "Eco-Purity", description: "100% recyclable Tetra Pak packaging.", accent: "bg-[#e9ff92] text-[#536d00]" }
-] as const;
+import { cartVariants, images, minerals, navItems, showcaseFeatures, storyCards } from "./tenderlyte-content";
 
 function useHeroScroll(heroRef: RefObject<HTMLElement | null>, prefersReducedMotion: boolean | null) {
   useEffect(() => {
@@ -151,13 +76,15 @@ function useScrolledHeader() {
 }
 
 function useActiveSection() {
-  const [activeHref, setActiveHref] = useState(navItems[0].href);
+  type NavHref = (typeof navItems)[number]["href"];
+  const [activeHref, setActiveHref] = useState<NavHref>(navItems[0].href);
 
   useEffect(() => {
     const updateFromHash = () => {
       const hash = window.location.hash;
       if (navItems.some((item) => item.href === hash)) {
-        setActiveHref((current) => (current === hash ? current : hash));
+        const nextHash = hash as NavHref;
+        setActiveHref((current) => (current === nextHash ? current : nextHash));
       }
     };
 
@@ -171,7 +98,7 @@ function useActiveSection() {
 
     const readActiveSection = () => {
       const scrollPosition = window.scrollY + 180;
-      let current = navItems[0].href;
+      let current: NavHref = navItems[0].href;
 
       for (const item of navItems) {
         const section = document.querySelector<HTMLElement>(item.href);
@@ -835,6 +762,10 @@ function CartModal({
     });
   };
 
+  const resetItems = () => {
+    setItems(Object.fromEntries(cartVariants.map((item) => [item.id, 0])) as Record<string, number>);
+  };
+
   return (
     <AnimatePresence>
       {open ? (
@@ -856,7 +787,7 @@ function CartModal({
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-8">
               <div>
                 <p className="font-display text-[11px] font-bold uppercase tracking-[0.16em] text-[#e9ff92]">Cart</p>
-                <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">Your TenderLyte Selection</h2>
+                <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">TenderLyte</h2>
               </div>
               <button
                 type="button"
@@ -869,14 +800,14 @@ function CartModal({
 
             <div className="grid gap-6 px-5 py-6 md:grid-cols-[1.2fr_0.8fr] md:px-8 md:py-8">
               <div className="grid gap-4">
-                {cartItems.map((item) => {
-                  const value = items[item.id] ?? 0;
+                {cartVariants.map((item) => {
+                  const quantity = items[item.id] ?? 0;
                   return (
                     <article key={item.id} className="glass-card rounded-[24px] border border-white/15 bg-white/10 p-4 md:p-5">
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <div className={`mb-3 inline-flex rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] ${item.accent}`}>
-                            Featured
+                            Product Option
                           </div>
                           <h3 className="font-display text-[18px] font-semibold text-white md:text-[20px]">{item.name}</h3>
                           <p className="mt-2 max-w-xl font-display text-sm leading-6 text-white/78">{item.description}</p>
@@ -890,7 +821,7 @@ function CartModal({
                             <span className="material-symbols-outlined text-[20px]">remove</span>
                           </button>
                           <div className="flex h-10 w-12 items-center justify-center rounded-full bg-[#e9ff92] font-display text-sm font-bold text-[#2f4600]">
-                            {value}
+                            {quantity}
                           </div>
                           <button
                             type="button"
@@ -911,13 +842,13 @@ function CartModal({
                   <p className="font-display text-xs font-bold uppercase tracking-[0.14em] text-[#e9ff92]">Summary</p>
                   <div className="mt-4 flex items-end gap-3">
                     <span className="font-display text-6xl font-semibold leading-none text-white">{totalCount}</span>
-                    <span className="pb-2 font-display text-sm font-bold uppercase tracking-[0.12em] text-white/65">items selected</span>
+                    <span className="pb-2 font-display text-sm font-bold uppercase tracking-[0.12em] text-white/65">units selected</span>
                   </div>
                   <p className="mt-4 max-w-sm font-display text-sm leading-6 text-white/75">
-                    Build your pack by adding the features you want. No pricing, just a clean count and a premium cart view.
+                    Build your order with either the single bottle or the 12-pack. No pricing, just a clean count and a premium cart view.
                   </p>
-                  <div className="mt-6 grid grid-cols-2 gap-3">
-                    {cartItems.map((item) => (
+                  <div className="mt-6 grid gap-3">
+                    {cartVariants.map((item) => (
                       <div key={item.id} className="rounded-[18px] border border-white/10 bg-white/8 px-4 py-3">
                         <p className="font-display text-[11px] font-bold uppercase tracking-[0.12em] text-white/65">{item.name}</p>
                         <p className="mt-2 font-display text-2xl font-semibold text-white">{items[item.id] ?? 0}</p>
@@ -929,7 +860,7 @@ function CartModal({
                   <button type="button" className="button-primary" onClick={onClose}>
                     Continue Browsing
                   </button>
-                  <button type="button" className="button-ghost" onClick={() => setItems(Object.fromEntries(cartItems.map((item) => [item.id, 0])) as Record<string, number>)}>
+                  <button type="button" className="button-ghost" onClick={resetItems}>
                     Clear Cart
                   </button>
                 </div>
@@ -970,7 +901,7 @@ export function TenderLyteLanding() {
   useReveal();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [items, setItems] = useState<Record<string, number>>(() =>
-    Object.fromEntries(cartItems.map((item) => [item.id, 0])) as Record<string, number>
+    Object.fromEntries(cartVariants.map((item) => [item.id, 0])) as Record<string, number>
   );
   const totalCount = Object.values(items).reduce((sum, count) => sum + count, 0);
 
