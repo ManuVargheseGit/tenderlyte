@@ -8,7 +8,7 @@ import type { FormEvent, PointerEvent, RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
 
 const images = {
-  heroCoconut: "/assets/tenderlyte-hero-coconut.png",
+  heroCoconut: `${process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? ""}/assets/tenderlyte-hero-coconut.png`,
   coconutSplit:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAxqo2cPHwiLImWNGLSOPNHBjctsxgegQiRW0yelZp-HBN3Oo9Lf6CXgR9T4TavtVWWc0C1yqc1tn0M4x-ChAyBfOhnC67DtSCiWqT-h5pWhsh502jZKu6e77vTqUSG73viMb8vbkMtgr0SQpJv0NwjwrNajiAOeJ6A2U-4ZPGb62T3pwqyz735oYs9uUhY0aEnf22bKv86i4fruWShyMjXIdtPQ-TNnEb6PTa5VHTSKIhXteuzEES6u6jpdDL9aT_ojdHJOGkMLr0",
   lab:
