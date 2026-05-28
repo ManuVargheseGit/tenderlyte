@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import type { FormEvent, PointerEvent, RefObject } from "react";
+import type { Dispatch, FormEvent, PointerEvent, RefObject, SetStateAction } from "react";
 import { useEffect, useRef, useState } from "react";
 
 const images = {
@@ -75,6 +75,13 @@ const storyCards = [
   ["Education Fund", "5% of every sale goes directly to the TenderLyte Scholars initiative in India."],
   ["Biodiversity Protection", "We protect 2 acres of rainforest for every 1 acre of coconut plantation we manage."]
 ];
+
+const cartItems = [
+  { id: "natural-electrolytes", name: "Natural Electrolytes", description: "Bio-available minerals for instant cellular recovery.", accent: "bg-[#c9ff35] text-[#536d00]" },
+  { id: "no-added-sugar", name: "No Added Sugar", description: "Pure hydration with a naturally sweet profile.", accent: "bg-[#d9ef77] text-[#425800]" },
+  { id: "fresh-daily", name: "Fresh Daily", description: "Harvested every 24 hours for peak vitality.", accent: "bg-[#bfe566] text-[#2f4600]" },
+  { id: "eco-purity", name: "Eco-Purity", description: "100% recyclable Tetra Pak packaging.", accent: "bg-[#e9ff92] text-[#536d00]" }
+] as const;
 
 function useHeroScroll(heroRef: RefObject<HTMLElement | null>, prefersReducedMotion: boolean | null) {
   useEffect(() => {
@@ -207,7 +214,7 @@ function ripple(event: PointerEvent<HTMLElement>) {
   target.classList.add("is-rippling");
 }
 
-function Header() {
+function Header({ onOpenCart }: { onOpenCart: () => void }) {
   const [activeHref, setActiveHref] = useActiveSection();
   const navRef = useRef<HTMLElement | null>(null);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
@@ -283,14 +290,14 @@ function Header() {
           );
         })}
       </nav>
-      <a
+      <button
         className="z-10 shrink-0 whitespace-nowrap rounded-full bg-lime-400 px-4 py-3 font-display text-[11px] font-bold uppercase tracking-[0.1em] text-[#536d00] shadow-lg transition-transform duration-500 hover:scale-105 md:px-8 md:text-xs"
-        href="#contact"
-        onClick={() => setActiveHref("#contact")}
+        type="button"
+        onClick={onOpenCart}
         onPointerDown={ripple}
       >
         Shop Now
-      </a>
+      </button>
     </motion.header>
   );
 }
@@ -303,7 +310,7 @@ function RemoteImage({ src, alt, className, priority = false }: { src: string; a
   );
 }
 
-function ShowcaseHero() {
+function ShowcaseHero({ onOpenCart }: { onOpenCart: () => void }) {
   const prefersReducedMotion = useReducedMotion();
   const cardLoop = prefersReducedMotion
     ? undefined
@@ -352,13 +359,13 @@ function ShowcaseHero() {
               <br />
               <span className="text-[#c9ff35]">Perfected.</span>
             </h1>
-            <p className="mt-4 max-w-xl text-[14px] leading-6 text-white/88 drop-shadow-[0_4px_18px_rgba(0,0,0,0.28)] md:text-[15px] md:leading-7">
+            <p className="mt-4 max-w-xl font-display text-[14px] leading-6 text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.28)] md:text-[15px] md:leading-7">
               Experience the futuristic purity of TenderLyte. Harvested at the peak of vitality and preserved through advanced tetra-lock technology.
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
-              <a className="button-primary" href="#contact" onPointerDown={ripple}>
+              <button className="button-primary" type="button" onClick={onOpenCart} onPointerDown={ripple}>
                 Order A Sample Pack
-              </a>
+              </button>
               <a className="button-ghost" href="#purity">
                 Explore Purity
               </a>
@@ -477,7 +484,7 @@ function ShowcaseFeature({ icon, title, text, accent }: { icon: string; title: s
         <span className="material-symbols-outlined">{icon}</span>
       </div>
       <h3 className="mb-2 font-display text-[17px] font-medium leading-tight text-white md:text-[18px]">{title}</h3>
-      <p className="max-w-[21ch] text-[11px] leading-[1.4] text-white/78 md:text-[12px] md:leading-[1.45]">{text}</p>
+      <p className="max-w-[21ch] font-display text-[11px] font-medium leading-[1.35] text-white/80 md:text-[12px] md:leading-[1.4]">{text}</p>
     </article>
   );
 }
@@ -685,7 +692,7 @@ function LifestyleScreen() {
   );
 }
 
-function ContactScreen() {
+function ContactScreen({ onOpenCart }: { onOpenCart: () => void }) {
   const [sent, setSent] = useState(false);
 
   function submitForm(event: FormEvent<HTMLFormElement>) {
@@ -704,7 +711,7 @@ function ContactScreen() {
             Experience the high-impact showcase of our premium coconut collection. Designed for the cinematic soul who demands clinical purity and organic vitality.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <a className="button-primary" href="#showcase" onPointerDown={ripple}>Explore Shop</a>
+            <button className="button-primary" type="button" onClick={onOpenCart} onPointerDown={ripple}>Explore Shop</button>
             <a className="button-ghost" href="#story">Our Process</a>
           </div>
         </div>
@@ -798,21 +805,189 @@ function Footer() {
   );
 }
 
+function CartModal({
+  open,
+  onClose,
+  items,
+  setItems
+}: {
+  open: boolean;
+  onClose: () => void;
+  items: Record<string, number>;
+  setItems: Dispatch<SetStateAction<Record<string, number>>>;
+}) {
+  useEffect(() => {
+    if (!open) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
+  const totalCount = Object.values(items).reduce((sum, count) => sum + count, 0);
+
+  const changeItem = (id: string, delta: number) => {
+    setItems((current) => {
+      const nextValue = Math.max(0, (current[id] ?? 0) + delta);
+      return { ...current, [id]: nextValue };
+    });
+  };
+
+  return (
+    <AnimatePresence>
+      {open ? (
+        <motion.div
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-[#04120d]/65 px-4 py-6 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onMouseDown={onClose}
+        >
+          <motion.div
+            className="relative w-full max-w-4xl overflow-hidden rounded-[32px] border border-white/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.08)_100%)] text-white shadow-[0_30px_100px_rgba(0,0,0,0.3)] backdrop-blur-2xl"
+            initial={{ y: 26, opacity: 0, scale: 0.96 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: 18, opacity: 0, scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 220, damping: 24 }}
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-8">
+              <div>
+                <p className="font-display text-[11px] font-bold uppercase tracking-[0.16em] text-[#e9ff92]">Cart</p>
+                <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">Your TenderLyte Selection</h2>
+              </div>
+              <button
+                type="button"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/15"
+                onClick={onClose}
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+
+            <div className="grid gap-6 px-5 py-6 md:grid-cols-[1.2fr_0.8fr] md:px-8 md:py-8">
+              <div className="grid gap-4">
+                {cartItems.map((item) => {
+                  const value = items[item.id] ?? 0;
+                  return (
+                    <article key={item.id} className="glass-card rounded-[24px] border border-white/15 bg-white/10 p-4 md:p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <div className={`mb-3 inline-flex rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] ${item.accent}`}>
+                            Featured
+                          </div>
+                          <h3 className="font-display text-[18px] font-semibold text-white md:text-[20px]">{item.name}</h3>
+                          <p className="mt-2 max-w-xl font-display text-sm leading-6 text-white/78">{item.description}</p>
+                        </div>
+                        <div className="flex min-w-[120px] items-center justify-end gap-2">
+                          <button
+                            type="button"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/15"
+                            onClick={() => changeItem(item.id, -1)}
+                          >
+                            <span className="material-symbols-outlined text-[20px]">remove</span>
+                          </button>
+                          <div className="flex h-10 w-12 items-center justify-center rounded-full bg-[#e9ff92] font-display text-sm font-bold text-[#2f4600]">
+                            {value}
+                          </div>
+                          <button
+                            type="button"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/15"
+                            onClick={() => changeItem(item.id, 1)}
+                          >
+                            <span className="material-symbols-outlined text-[20px]">add</span>
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              <aside className="glass-card flex flex-col justify-between rounded-[28px] border border-white/15 bg-white/10 p-5 md:p-6">
+                <div>
+                  <p className="font-display text-xs font-bold uppercase tracking-[0.14em] text-[#e9ff92]">Summary</p>
+                  <div className="mt-4 flex items-end gap-3">
+                    <span className="font-display text-6xl font-semibold leading-none text-white">{totalCount}</span>
+                    <span className="pb-2 font-display text-sm font-bold uppercase tracking-[0.12em] text-white/65">items selected</span>
+                  </div>
+                  <p className="mt-4 max-w-sm font-display text-sm leading-6 text-white/75">
+                    Build your pack by adding the features you want. No pricing, just a clean count and a premium cart view.
+                  </p>
+                  <div className="mt-6 grid grid-cols-2 gap-3">
+                    {cartItems.map((item) => (
+                      <div key={item.id} className="rounded-[18px] border border-white/10 bg-white/8 px-4 py-3">
+                        <p className="font-display text-[11px] font-bold uppercase tracking-[0.12em] text-white/65">{item.name}</p>
+                        <p className="mt-2 font-display text-2xl font-semibold text-white">{items[item.id] ?? 0}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button type="button" className="button-primary" onClick={onClose}>
+                    Continue Browsing
+                  </button>
+                  <button type="button" className="button-ghost" onClick={() => setItems(Object.fromEntries(cartItems.map((item) => [item.id, 0])) as Record<string, number>)}>
+                    Clear Cart
+                  </button>
+                </div>
+              </aside>
+            </div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+function FloatingCartButton({
+  count,
+  onClick
+}: {
+  count: number;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="fixed bottom-5 right-5 z-[60] flex items-center gap-3 rounded-full border border-white/20 bg-[linear-gradient(180deg,rgba(201,255,53,0.95)_0%,rgba(233,255,146,0.92)_100%)] px-4 py-3 text-[#536d00] shadow-[0_20px_50px_rgba(8,44,33,0.2)] backdrop-blur-xl transition-transform duration-300 hover:scale-105 md:bottom-6 md:right-6"
+    >
+      <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#536d00] text-white">
+        <span className="material-symbols-outlined">shopping_bag</span>
+        <span className="absolute -right-1 -top-1 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-white px-1 text-[10px] font-black text-[#536d00]">
+          {count}
+        </span>
+      </span>
+      <span className="hidden font-display text-[11px] font-bold uppercase tracking-[0.12em] md:block">Cart</span>
+    </button>
+  );
+}
+
 export function TenderLyteLanding() {
   useReveal();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [items, setItems] = useState<Record<string, number>>(() =>
+    Object.fromEntries(cartItems.map((item) => [item.id, 0])) as Record<string, number>
+  );
+  const totalCount = Object.values(items).reduce((sum, count) => sum + count, 0);
 
   return (
     <>
-      <Header />
+      <Header onOpenCart={() => setIsCartOpen(true)} />
       <main>
-        <ShowcaseHero />
+        <ShowcaseHero onOpenCart={() => setIsCartOpen(true)} />
         <ProductShowcase />
         <PurityScreen />
         <StoryScreen />
         <LifestyleScreen />
-        <ContactScreen />
+        <ContactScreen onOpenCart={() => setIsCartOpen(true)} />
       </main>
       <Footer />
+      <FloatingCartButton count={totalCount} onClick={() => setIsCartOpen(true)} />
+      <CartModal open={isCartOpen} onClose={() => setIsCartOpen(false)} items={items} setItems={setItems} />
     </>
   );
 }
